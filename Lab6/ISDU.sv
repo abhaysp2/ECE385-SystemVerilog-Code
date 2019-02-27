@@ -55,13 +55,13 @@ module ISDU (   input logic         Clk,
 									Mem_WE
 				);
 
-	enum logic [3:0] {  Halted, 
+	enum logic [4:0] {Halted, 
 						PauseIR1, 
 						PauseIR2, 
 						S_18, S_33_1, S_33_2, S_35, S_32, 
 						S_01, S_25_1, S_25_2, S_27, S_23,
 						S_16_1, S_16_2, S_21, S_22, 
-						AND, NOT, LDR, STR, JSR, JMP, BR}   State, Next_state;   // Internal state logic
+						AND, NOT, LDR, STR, JSR, JMP, BR, PAUSE}  State, Next_state;   // Internal state logic
 		
 	always_ff @ (posedge Clk)
 	begin
@@ -171,7 +171,7 @@ module ISDU (   input logic         Clk,
 				Next_state = S_18;
 				
 			//BR
-			BR1 : 
+			BR : 
 				if(BEN)
 					Next_state = S_22;
 				else
@@ -277,7 +277,7 @@ module ISDU (   input logic         Clk,
 					LD_REG = 1'b1;
 					LD_CC = 1'b1;	
 				end
-			LD :
+			LDR :
 				begin
 					SR1MUX = 1'b1;
 					ADDR1MUX = 1'b1;
