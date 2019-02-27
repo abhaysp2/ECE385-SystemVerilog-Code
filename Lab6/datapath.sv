@@ -54,7 +54,7 @@ mux2  #(16) 	Mux_MDR(.d0(Path), .d1(MDR_In), .s(MIO_EN), .y(MDR_Entry)); //Mux g
 unique_mux  	Mux_Gates(.S({GateMARMUX, GateALU, GateMDR, GatePC}), .PC(PC), .Adder(Adder_Out), 
 					.MDR(MDR), .ALU(ALU_New), .outputs(Path)); //tristatebuffer representation
 
-mux4  #(16)		ADDR2_Mux(.d0(), .d1(Sext6), .d2(Sext9), .d3(Sext11), .s(ADDR2MUX), .y(ADDR2_Out)); //adder 2 mux into adder
+mux4  #(16)		ADDR2_Mux(.d0(16'h0), .d1(Sext6), .d2(Sext9), .d3(Sext11), .s(ADDR2MUX), .y(ADDR2_Out)); //adder 2 mux into adder
 mux2  #(16) 	ADDR1_Mux(.d0(PC), .d1(Base_R), .s(ADDR1MUX), .y(ADDR1_Out));		         		//adder 1 mux into adder
 ALU				Adder_Path(.A(ADDR2_Out), .B(ADDR1_Out), .Out(Adder_Out), .s(2'b00));		 //adder into PC and path
 
