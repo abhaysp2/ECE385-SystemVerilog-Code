@@ -61,7 +61,7 @@ module ISDU (   input logic         Clk,
 						S_18, S_33_1, S_33_2, S_35, S_32, 
 						S_01, S_25_1, S_25_2, S_27, S_23,
 						S_16_1, S_16_2, S_21, S_22, 
-						AND, NOT, LDR, STR, JSR, JMP, BR, PAUSE}  State, Next_state;   // Internal state logic
+						AND, NOT, LDR, STR, JSR, JMP, BR, PAUSE1, PAUSE2}  State, Next_state;   // Internal state logic
 		
 	always_ff @ (posedge Clk)
 	begin
@@ -129,6 +129,16 @@ module ISDU (   input logic         Clk,
 				if (Continue) 
 					Next_state = PauseIR2;
 				else 
+					Next_state = S_32;
+			PAUSE1 :
+				if (~Continue) 
+					Next_state = PAUSE1;
+				else 
+					Next_state = PAUSE2;
+			PAUSE2 :
+				if (Continue) 
+					Next_state = PAUSE2;
+				else 
 					Next_state = S_18;
 			S_32 : 
 				case (Opcode)
@@ -149,7 +159,7 @@ module ISDU (   input logic         Clk,
 					4'b0111 :
 						Next_state = STR;
 					4'b1101 :
-						Next_state = PAUSE;
+						Next_state = PAUSE1;
 					
 
 					// You need to finish the rest of opcodes.....
@@ -245,8 +255,16 @@ module ISDU (   input logic         Clk,
 					GateMDR = 1'b1;
 					LD_IR = 1'b1;
 				end
+				
 			PauseIR1: ;
 			PauseIR2: ;
+			
+			PAUSE1:
+				begin
+					LD_LED = 1'b1;
+				end
+			PAUSE2: ;
+			
 			S_32 : 
 				LD_BEN = 1'b1;
 			S_01 : 

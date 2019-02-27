@@ -1,7 +1,8 @@
 module testbench();
 
-timeunit 10ns;	// Half clock cycle at 50 MHz
-			// This is the amount of time represented by #1 
+timeunit 10ns;// Half clock cycle at 50 MHz
+			// This is the amount of time represented by #1
+
 timeprecision 1ns;
 
 // These signals are internal because the processor will be 
@@ -9,31 +10,32 @@ timeprecision 1ns;
 logic [15:0] S;
 logic	Clk, Reset, Run, Continue;
 logic [11:0] LED;
-logic [6:0] AhexL,
-		 AhexU,
-		 BhexL,
-		 BhexU; 
+logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7;
+logic CE, UB, LB, OE, WE;
+logic [19:0] ADDR;
 
+wire [15:0] Data;
 
-
-// To store expected results
-logic [8:0] XA;
-logic [7:0] B;
-				
-		
 // Instantiating the DUT
 // Make sure the module and signal names match with those in your design
-multiplier multiplier0(.*);	
+				
+slc3 my_slc3(.*);
+// A counter to count the instances where simulation results
+// do no match with expected results
+
+logic [15:0] PC, MAR, MDR, IR; 
 
 // Toggle the clock
 // #1 means wait for a delay of 1 timeunit
-always begin : CLOCK_GENERATION
+always begin: CLOCK_GENERATION
 #1 Clk = ~Clk;
 end
 
 initial begin: CLOCK_INITIALIZATION
-    Clk = 0;
-end 
+	Clk = 0;
+end
+
+
 
 // Testing begins here
 // The initial block is not synthesizable
@@ -41,16 +43,24 @@ end
 // as in a software program
 initial begin: TEST_VECTORS
 Reset = 0;		// Toggle Rest
-ClearA_LoadB = 1;
-S = 8'b00000001;	// Specify S
 Run = 1;
+Continue = 1;
+S = 16'b0000000000000011;
 
 #2 Reset = 1;
-#2 ClearA_LoadB = 0;
-#2 ClearA_LoadB = 1;
-#2 S = 8'b11111111;
-#2 Run = 0;
-#22 Run = 1;
+
+#2 Run = 0;	
+   
+#2 Run = 1;
+/*
+#60 Continue = 0;
+#2 Continue = 1;
+#60 Continue = 0;
+#2 Continue = 1;
+*/
+#100 S = 16'b0000000000000001;
+
+#100 S = 16'b0000000000000010;
 
 end
 endmodule
