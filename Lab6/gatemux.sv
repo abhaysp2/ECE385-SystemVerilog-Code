@@ -14,7 +14,7 @@ always_comb
 			4'b0010 : outputs = MDR;
 			4'b0100 : outputs = ALU;
 			4'b1000 : outputs = Adder;
-			default : outputs = 16'h0; 
+			default : outputs = 16'hxxxx; 
 		endcase
 	end
 endmodule 

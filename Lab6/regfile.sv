@@ -7,7 +7,7 @@ logic [7:0][15:0] OUT;
 			
 always_ff @ (posedge Clk)
 	begin
-		if (~Reset)
+		if (Reset)
 			begin
 				OUT[0] <= 16'h0;
 				OUT[1] <= 16'h0;

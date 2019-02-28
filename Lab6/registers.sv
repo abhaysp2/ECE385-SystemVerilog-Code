@@ -1,6 +1,5 @@
 module reg_base (input  logic Clk, Reset, Load,
 					  input  logic [15:0]  D,
-					  output logic Shift_Out,
                  output logic [15:0]  Data_Out);
 
     always_ff @ (posedge Clk)

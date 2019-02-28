@@ -19,11 +19,12 @@ wire [15:0] Data;
 // Instantiating the DUT
 // Make sure the module and signal names match with those in your design
 				
-slc3 my_slc3(.*);
+lab6_toplevel my_toplevel(.*);
 // A counter to count the instances where simulation results
 // do no match with expected results
 
-logic [15:0] PC, MAR, MDR, IR; 
+logic [15:0] PC, MAR, MDR, IR;
+logic [1:0] PCMUX; 
 
 // Toggle the clock
 // #1 means wait for a delay of 1 timeunit
@@ -34,6 +35,8 @@ end
 initial begin: CLOCK_INITIALIZATION
 	Clk = 0;
 end
+
+
 
 
 
@@ -52,15 +55,8 @@ S = 16'b0000000000000011;
 #2 Run = 0;	
    
 #2 Run = 1;
-/*
-#60 Continue = 0;
-#2 Continue = 1;
-#60 Continue = 0;
-#2 Continue = 1;
-*/
-#100 S = 16'b0000000000000001;
 
-#100 S = 16'b0000000000000010;
+
 
 end
 endmodule

@@ -22,7 +22,7 @@ module datapath (input logic LD_MAR, LD_MDR, LD_IR, LD_BEN, LD_CC,
 					 ADDR2_Out,				 //4 to 1 mux output into adder
 					 ADDR1_Out,				 //2 to 1 mux output into adder
 					 SR2_Out,				 //SR2 from reg file
-					 SR2MuxOut;
+					 SR2Mux_Out;
 									
 					 logic [2:0]
 					 DR_Out,					 //DR output
@@ -48,7 +48,7 @@ reg_base 		MDR_Reg (.Clk(Clk), .Reset(Reset), .Load(LD_MDR), .D(MDR_Entry), .Dat
 reg_base 		IR_Reg  (.Clk(Clk), .Reset(Reset), .Load(LD_IR), .D(Path), .Data_Out(IR));	 //IR reg
 
 PC_adder 		plusPC (.PC_Val(PC), .PC_Val_add(PC_New_Out));									//Increases PC value
-mux3 	#(16)		Mux_PC(.d0(PC_New_Out), .d1(Path), .d2(Adder_Out), .s(PC_MUX), .y(PC_Entry));	//Mux going to PC
+mux3 	#(16)		Mux_PC(.d0(PC_New_Out), .d1(Path), .d2(Adder_Out), .s(PCMUX), .y(PC_Entry));	//Mux going to PC
 
 mux2  #(16) 	Mux_MDR(.d0(Path), .d1(MDR_In), .s(MIO_EN), .y(MDR_Entry)); //Mux going into MDR
 
@@ -64,8 +64,8 @@ mux2  #(3) 		SR1_Mux(.d0(IR[11:9]), .d1(IR[8:6]), .s(SR1MUX), .y(SR1Mux_Out));  
 regfile    		Reg_File(.*, .Load(LD_REG), .SR1_Input(SR1Mux_Out), .SR2_Input(SR2), 	//reg file 
 					.DR_Input(DR_Out), .D(Path));	
 
-ALU            ALU_unit(.A(Base_R), .B(SR2_MuxOut), .s(ALUK), .Out(ALU_New)); 				//ALU unit
-mux2  #(16)    SR2_Mux(.d0(SR2_Out), .d1(Sext5), .s(SR2MUX), .y(SR2_MuxOut));				//SR2 mux into ALU
+ALU            ALU_unit(.A(Base_R), .B(SR2Mux_Out), .s(ALUK), .Out(ALU_New)); 				//ALU unit
+mux2  #(16)    SR2_Mux(.d0(SR2_Out), .d1(Sext5), .s(SR2MUX), .y(SR2Mux_Out));				//SR2 mux into ALU
 
 NZP 				NZP_Reg(.*);		//NZP unit
 BEN_Reg			BEN_Unit(.*, .N(N_Out), .Z(Z_Out), .P(P_Out), .In(IR[11:9]));	//BEN unit

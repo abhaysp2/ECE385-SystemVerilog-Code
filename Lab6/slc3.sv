@@ -48,7 +48,7 @@ logic [15:0] Data_from_SRAM, Data_to_SRAM;
 // Signals being displayed on hex display
 logic [3:0][3:0] hex_4;
 
- /*//For week 1, hexdrivers will display IR. Comment out these in week 2.
+/*//For week 1, hexdrivers will display IR. Comment out these in week 2.
 HexDriver hex_driver3 (IR[15:12], HEX3);
 HexDriver hex_driver2 (IR[11:8], HEX2);
 HexDriver hex_driver1 (IR[7:4], HEX1);
