@@ -3,11 +3,11 @@ module regfile(input logic Clk, Load, Reset,
 				   input  logic [15:0] D,
 				   output logic [15:0] Base_R, SR2_Out);
 			
-logic [7:0][15:0] OUT;
+logic [7:0][15:0] OUT; //representation of dat
 			
 always_ff @ (posedge Clk)
 	begin
-		if (Reset)
+		if (Reset)		//set all 8 registers to 0
 			begin
 				OUT[0] <= 16'h0;
 				OUT[1] <= 16'h0;
@@ -18,7 +18,7 @@ always_ff @ (posedge Clk)
 				OUT[6] <= 16'h0;
 				OUT[7] <= 16'h0;
 			end		
-		else if (Load)	
+		else if (Load)			//load register specified by DR_Input with input Path 
 			case(DR_Input)
 				3'b000: OUT[0] <= D;
 				3'b001: OUT[1] <= D;
@@ -33,8 +33,8 @@ always_ff @ (posedge Clk)
 	end	
 always_comb 
 	begin	
-		case(SR1_Input) 
-			3'b000: Base_R <= OUT[0];
+		case(SR1_Input) //selects output data selected by SR1_Input
+			3'b000: Base_R <= OUT[0];		
 			3'b001: Base_R <= OUT[1];
 			3'b010: Base_R <= OUT[2];
 			3'b011: Base_R <= OUT[3];
@@ -45,7 +45,7 @@ always_comb
 			default: ;
 		endcase
 				
-		case(SR2_Input) 
+		case(SR2_Input) //selects output data selected by SR_Input
 			3'b000: SR2_Out <= OUT[0];
 			3'b001: SR2_Out <= OUT[1];
 			3'b010: SR2_Out <= OUT[2];

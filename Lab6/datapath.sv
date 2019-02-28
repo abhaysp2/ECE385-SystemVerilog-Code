@@ -70,7 +70,7 @@ mux2  #(16)    SR2_Mux(.d0(SR2_Out), .d1(Sext5), .s(SR2MUX), .y(SR2Mux_Out));			
 NZP 				NZP_Reg(.*);		//NZP unit
 BEN_Reg			BEN_Unit(.*, .N(N_Out), .Z(Z_Out), .P(P_Out), .In(IR[11:9]));	//BEN unit
 
-always_comb
+always_comb			//logic for nzp 
 begin 
 	if (Path[15])
 		begin 
@@ -97,7 +97,7 @@ begin
 	end
 end
 			
-always_ff @ (posedge Clk)
+always_ff @ (posedge Clk)		//logic for LED output 
 	begin
 		if(LD_LED)
 			LED <= IR[11:0];
