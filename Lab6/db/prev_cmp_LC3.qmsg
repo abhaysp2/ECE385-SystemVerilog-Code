@@ -1,0 +1,13 @@
+{ "Info" "0" "" "qar.tcl version #1" {  } {  } 0 0 "qar.tcl version #1" 0 0 "0" 0 0 1551388614934 ""}
+{ "Info" "0" "" "Including '-use_file_set basic' by default" {  } {  } 0 0 "Including '-use_file_set basic' by default" 0 0 "0" 0 0 1551388615965 ""}
+{ "Info" "0" "" "All project revisions will be stored in common archive LC3_tmp_archive.qar" {  } {  } 0 0 "All project revisions will be stored in common archive LC3_tmp_archive.qar" 0 0 "0" 0 0 1551388615965 ""}
+{ "Info" "0" "" "Initializing files for 'LC3' revision" {  } {  } 0 0 "Initializing files for 'LC3' revision" 0 0 "0" 0 0 1551388616127 ""}
+{ "Info" "0" "" "File Set 'Source control' contains:" { { "Info" "0" "" "Project source and settings files" {  } {  } 0 0 "Project source and settings files" 0 0 "0" 0 0 1551388616154 ""} { "Info" "0" "" "Automatically detected source files" {  } {  } 0 0 "Automatically detected source files" 0 0 "0" 0 0 1551388616154 ""}  } {  } 0 0 "File Set 'Source control' contains:" 0 0 "0" 0 0 1551388616154 ""}
+{ "Warning" "0" "" "Hierarchical Platform Designer systems and custom IP components(_hw.tcl and associated files) are not archived by the Quartus Archiver" {  } {  } 0 0 "Hierarchical Platform Designer systems and custom IP components(_hw.tcl and associated files) are not archived by the Quartus Archiver" 0 0 "0" 0 0 1551388616286 ""}
+{ "Info" "0" "" "Archive will store files relative to the closest common parent directory" {  } {  } 0 0 "Archive will store files relative to the closest common parent directory" 0 0 "0" 0 0 1551388616547 ""}
+{ "Info" "IPRJ_ARC_TCL_TCL_USING_COMMON_DIR" "C:/Users/Abhay/ECE385_MAIN/Lab6/ " "Using common directory C:/Users/Abhay/ECE385_MAIN/Lab6/" {  } {  } 0 13213 "Using common directory %1!s!" 0 0 "Design Software" 0 -1 1551388616630 ""}
+{ "Info" "0" "" "----------------------------------------------------------" {  } {  } 0 0 "----------------------------------------------------------" 0 0 "0" 0 0 1551388616822 ""}
+{ "Info" "0" "" "----------------------------------------------------------" {  } {  } 0 0 "----------------------------------------------------------" 0 0 "0" 0 0 1551388616822 ""}
+{ "Info" "0" "" "Generated archive 'LC3_tmp_archive.qar'" {  } {  } 0 0 "Generated archive 'LC3_tmp_archive.qar'" 0 0 "0" 0 0 1551388616822 ""}
+{ "Info" "0" "" "----------------------------------------------------------" {  } {  } 0 0 "----------------------------------------------------------" 0 0 "0" 0 0 1551388616822 ""}
+{ "Info" "0" "" "----------------------------------------------------------" {  } {  } 0 0 "----------------------------------------------------------" 0 0 "0" 0 0 1551388616822 ""}

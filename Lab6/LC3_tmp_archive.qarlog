@@ -1,0 +1,43 @@
+Quartus Prime Archive log --	C:/Users/Abhay/ECE385_MAIN/Lab6/LC3_tmp_archive.qarlog
+
+Archive:	C:/Users/Abhay/ECE385_MAIN/Lab6/LC3_tmp_archive.qar
+Date:		Thu Feb 28 15:16:56 2019
+Quartus Prime		18.0.0 Build 614 04/24/2018 SJ Lite Edition
+
+	=========== Files Selected: ===========
+C:/Users/Abhay/ECE385_MAIN/Lab6/2to1mux.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/3to1mux.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/4to1mux.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/ALU.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/BEN unit.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/HexD.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/ISDU.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/LC3.qpf
+C:/Users/Abhay/ECE385_MAIN/Lab6/LC3.qsf
+C:/Users/Abhay/ECE385_MAIN/Lab6/Mem2IO.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/PCadder.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/SEXT6.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/SLC3_2.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/datapath.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/gatemux.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/lab6_toplevel.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/memory_contents.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/muxes.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/nzp register.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/regfile.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/registers.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/slc3.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/test_memory.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/testbench6.sv
+C:/Users/Abhay/ECE385_MAIN/Lab6/tristate.sv
+c:/intelfpga_lite/18.0/quartus/bin64/assignment_defaults.qdf
+	======= Total: 26 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
+
+
+******* Archived project restoration attempt on Thu Feb 28 15:16:59 2019
+Source archive file:	C:/Users/Abhay/ECE385_MAIN/Lab6/LC3_tmp_archive.qar
+Archive was extracted into	D:/ECE385 Code/abhaysp2-dvarga27/
+		 - successfully.
