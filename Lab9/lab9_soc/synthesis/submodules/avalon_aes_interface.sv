@@ -32,6 +32,44 @@ module avalon_aes_interface (
 	// Exported Conduit
 	output logic [31:0] EXPORT_DATA);		// Exported Conduit Signal to LEDs
 	
-	regfile registers(.*, .D(AVL_WRITEDATA), .Output(AVL_READDATA));
+logic [15:0][31:0] REG; //representation of dat
+logic [31:0] Change;
+assign EXPORT_DATA = {REG[3][31:16], REG[0][15:0]};
 
+always_ff @ (posedge CLK)
+    begin
+	 
+		  if (AVL_BYTE_EN[0] == 1) //selects REGput data selected by SR1_Input 
+				Change[7:0] <= AVL_WRITEDATA[7:0];
+		  if (AVL_BYTE_EN[1] == 1)
+				Change[15:8] <= AVL_WRITEDATA[15:8];
+		  if (AVL_BYTE_EN[2] == 1)
+				Change[23:16] <= AVL_WRITEDATA[23:16];
+		  if (AVL_BYTE_EN[3] == 1)
+				Change[31:24] <= AVL_WRITEDATA[31:24];
+				
+        if (RESET)      //set all 16 registers to 0
+            begin
+                REG[0] <= 31'h0;
+                REG[1] <= 31'h0;
+                REG[2] <= 31'h0;
+                REG[3] <= 31'h0;
+                REG[4] <= 31'h0;
+                REG[5] <= 31'h0;
+                REG[6] <= 31'h0;
+                REG[7] <= 31'h0;
+                REG[8] <= 31'h0;
+                REG[9] <= 31'h0;
+                REG[10] <= 31'h0;
+                REG[11] <= 31'h0;
+                REG[12] <= 31'h0;
+                REG[13] <= 31'h0;
+                REG[14] <= 31'h0;
+                REG[15] <= 31'h0;
+            end    
+				
+        else if (AVL_WRITE & AVL_CS)            //output register specified by addr
+					REG[AVL_ADDR] <= Change;     				
+		end
+   
 endmodule
