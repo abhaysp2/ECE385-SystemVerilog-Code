@@ -34,11 +34,10 @@ module avalon_aes_interface (
 	
 logic [31:0] REG [15:0]; //representation of dat
 logic [31:0] Change;
-assign EXPORT_DATA = {REG[3][31:16], REG[0][15:0]};
+assign EXPORT_DATA = {REG[0][31:16], REG[3][15:0]};
 
 always_ff @ (posedge CLK)
     begin
-	 
 		  if (AVL_BYTE_EN[0] == 1) //selects REGput data selected by SR1_Input 
 				Change[7:0] <= AVL_WRITEDATA[7:0];
 		  if (AVL_BYTE_EN[1] == 1)
@@ -50,22 +49,22 @@ always_ff @ (posedge CLK)
 				
         if (RESET)      //set all 16 registers to 0
             begin
-                REG[0] <= 31'h0;
-                REG[1] <= 31'h0;
-                REG[2] <= 31'h0;
-                REG[3] <= 31'h0;
-                REG[4] <= 31'h0;
-                REG[5] <= 31'h0;
-                REG[6] <= 31'h0;
-                REG[7] <= 31'h0;
-                REG[8] <= 31'h0;
-                REG[9] <= 31'h0;
-                REG[10] <= 31'h0;
-                REG[11] <= 31'h0;
-                REG[12] <= 31'h0;
-                REG[13] <= 31'h0;
-                REG[14] <= 31'h0;
-                REG[15] <= 31'h0;
+                REG[0] <= 32'h0;
+                REG[1] <= 32'h0;
+                REG[2] <= 32'h0;
+                REG[3] <= 32'h0;
+                REG[4] <= 32'h0;
+                REG[5] <= 32'h0;
+                REG[6] <= 32'h0;
+                REG[7] <= 32'h0;
+                REG[8] <= 32'h0;
+                REG[9] <= 32'h0;
+                REG[10] <= 32'h0;
+                REG[11] <= 32'h0;
+                REG[12] <= 32'h0;
+                REG[13] <= 32'h0;
+                REG[14] <= 32'h0;
+                REG[15] <= 32'h0;
             end    
 				
         else if (AVL_WRITE & AVL_CS)            //output register specified by addr
