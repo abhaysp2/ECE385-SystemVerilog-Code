@@ -1,11 +1,13 @@
 module counter4(input logic CLK,
-					 output logic Count);
+					 input logic CountEnable, 
+					 output logic [2:0] Count);
 
 logic counter = 3'b000;
 
 always_ff @ (posedge CLK)
 begin
-	Count <= counter;
+	if(CountEnable)
+		Count <= counter;
 end
 
 always_comb
@@ -21,13 +23,15 @@ endmodule
 
 
 module counter9(input logic CLK,
-					 output logic Count);
+					 input logic CountEnable,
+					 output logic [3:0] Count);
 					 
 logic counter = 4'b0000;
 
 always_ff @ (posedge CLK)
 begin
-	Count <= counter;
+	if(CountEnable)
+		Count <= counter;
 end
 
 always_comb
@@ -41,12 +45,14 @@ end
 endmodule
 
 module counterkey(input logic CLK,
-					 output logic Count);
+						input logic CountEnable,
+					   output logic [4:0] Count);
 logic counter = 5'b00000;
 
 always_ff @ (posedge CLK)
 begin
-	Count <= counter;
+	if(CountEnable)
+		Count <= counter;
 end
 
 always_comb
