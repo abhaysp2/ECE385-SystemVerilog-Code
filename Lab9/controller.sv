@@ -2,10 +2,11 @@ module controller(input logic CLK, RESET, AES_START,
 						output logic [1:0] SELECT, IMC_select,
 						output logic [4:0] count,
 						output logic Check_First,
-						output logic AES_DONE]);
+						output logic AES_DONE);
 						
 						
-	enum logic [4:0] {WAIT, DONE, KeyExpansion, ARK1} State, Next_state;
+	enum logic [4:0] {WAIT, DONE, KeyExpansion, ARK1, ARK2, ARK_LOOP, ISR_LOOP, ISB_LOOP,
+							IMC_LOOP, IMC_LOOP0, IMC_LOOP1, IMC_LOOP2, IMC_LOOP3, ISR, ISB} State, Next_state;
 	
 	
 	logic [3:0] round, in_round;
@@ -24,7 +25,7 @@ module controller(input logic CLK, RESET, AES_START,
 	always_ff @ (posedge CLK)
 	begin
 		count <= count9;
-		if (Reset)
+		if (RESET)
 		begin
 			State <= WAIT;
 			//round <= 4'b0000;
@@ -32,7 +33,7 @@ module controller(input logic CLK, RESET, AES_START,
 		else
 			State <= Next_state;
 			//round <= in_round;
-	
+	end
 	always_comb
 	begin
 		Next_state = State;
@@ -142,6 +143,6 @@ module controller(input logic CLK, RESET, AES_START,
 				begin
 					SELECT = 2'b10;
 				end
-				
-		
+			endcase
 	end
+endmodule

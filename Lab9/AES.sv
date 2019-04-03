@@ -21,12 +21,13 @@ module AES (
 	logic [127:0] State_New,
 					  ISR_Out,
 					  ISB_Out,
-					  ARK_Out,
 					  IMC_Total_Out,
+					  ARK_Out,
 					  ARK_INPUT;
-	logic [31:0] IMC_input; IMC_to_add
-	
+	logic [31:0] IMC_input, IMC_to_add, invsub_out;
+	logic Check_First;
 	logic [1:0] SELECT, IMC_select;
+	logic [4:0] count;
 					  
 	always_comb
 		begin
@@ -36,23 +37,23 @@ module AES (
 				ARK_INPUT = State_New;
 		end
 		
-	always_ff @ (posedge clk)
+	always_ff @ (posedge CLK)
 	begin
 		if(IMC_select == 2'b00)
 		begin
-			IMC_total_out[31:0] <= IMC_to_add;
+			IMC_Total_Out[31:0] <= IMC_to_add;
 		end
 		else if(IMC_select == 2'b01)
 		begin
-			IMC_total_out[63:32] <= IMC_to_add;
+			IMC_Total_Out[63:32] <= IMC_to_add;
 		end
 		else if(IMC_select == 2'b10)
 		begin
-			IMC_total_out[95:64] <= IMC_to_add;
+			IMC_Total_Out[95:64] <= IMC_to_add;
 		end
 		else if(IMC_select == 2'b11)
 		begin
-			IMC_total_out[127:96] <= IMC_to_add;
+			IMC_Total_Out[127:96] <= IMC_to_add;
 		end
 	end
 
@@ -60,28 +61,27 @@ module AES (
 	
 	InvShiftRows(.data_in(State_New), .data_out(ISR_Out));
 	
-	InvSubBytes		invsubBytes_0	(clk, State_New[7:0], invsub_out[7:0]);
-	InvSubBytes		invsubBytes_1	(clk, State_New[15:8], invsub_out[15:8]);
-	InvSubBytes		invsubBytes_2	(clk, State_New[23:16], invsub_out[23:16]);
-	InvSubBytes		invsubBytes_3	(clk, State_New[31:24], invsub_out[31:24]);
-	InvSubBytes		invsubBytes_4	(clk, State_New[39:32], invsub_out[39:32]);
-	InvSubBytes		invsubBytes_5	(clk, State_New[47:40], invsub_out[47:40]);
-	InvSubBytes		invsubBytes_6	(clk, State_New[55:48], invsub_out[55:48]);
-	InvSubBytes		invsubBytes_7	(clk, State_New[63:56], invsub_out[63:56]);
-	InvSubBytes		invsubBytes_8	(clk, State_New[71:64], invsub_out[71:64]);
-	InvSubBytes		invsubBytes_9	(clk, State_New[79:72], invsub_out[79:72]);
-	InvSubBytes		invsubBytes_10	(clk, State_New[87:80], invsub_out[87:80]);
-	InvSubBytes		invsubBytes_11 (clk, State_New[96:88], invsub_out[96:88]);
-	InvSubBytes		invsubBytes_12	(clk, State_New[103:96], invsub_out[103:96]);
-	InvSubBytes		invsubBytes_13	(clk, State_New[111:104], invsub_out[111:104]);
-	InvSubBytes		invsubBytes_14	(clk, State_New[119:112], invsub_out[119:112]);
-	InvSubBytes		invsubBytes_15	(clk, State_New[127:120], invsub_out[127:120]);
+	InvSubBytes		invsubBytes_0	(.clk(CLK), .in(State_New[7:0]), .out(invsub_out[7:0]));
+	InvSubBytes		invsubBytes_1	(.clk(CLK), .in(State_New[15:8]), .out(invsub_out[15:8]));
+	InvSubBytes		invsubBytes_2	(.clk(CLK), .in(State_New[23:16]), .out(invsub_out[23:16]));
+	InvSubBytes		invsubBytes_3	(.clk(CLK), .in(State_New[31:24]), .out(invsub_out[31:24]));
+	InvSubBytes		invsubBytes_4	(.clk(CLK), .in(State_New[39:32]), .out(invsub_out[39:32]));
+	InvSubBytes		invsubBytes_5	(.clk(CLK), .in(State_New[47:40]), .out(invsub_out[47:40]));
+	InvSubBytes		invsubBytes_6	(.clk(CLK), .in(State_New[55:48]), .out(invsub_out[55:48]));
+	InvSubBytes		invsubBytes_7	(.clk(CLK), .in(State_New[63:56]), .out(invsub_out[63:56]));
+	InvSubBytes		invsubBytes_8	(.clk(CLK), .in(State_New[71:64]), .out(invsub_out[71:64]));
+	InvSubBytes		invsubBytes_9	(.clk(CLK), .in(State_New[79:72]), .out(invsub_out[79:72]));
+	InvSubBytes		invsubBytes_10	(.clk(CLK), .in(State_New[87:80]), .out(invsub_out[87:80]));
+	InvSubBytes		invsubBytes_11 (.clk(CLK), .in(State_New[96:88]), .out(invsub_out[96:88]));
+	InvSubBytes		invsubBytes_12	(.clk(CLK), .in(State_New[103:96]), .out(invsub_out[103:96]));
+	InvSubBytes		invsubBytes_13	(.clk(CLK), .in(State_New[111:104]), .out(invsub_out[111:104]));
+	InvSubBytes		invsubBytes_14	(.clk(CLK), .in(State_New[119:112]), .out(invsub_out[119:112]));
+	InvSubBytes		invsubBytes_15	(.clk(CLK), .in(State_New[127:120]), .out(invsub_out[127:120]));
 	
 	InvMixColumns  mixcolumns(.in(IMC_input), .out(IMC_to_add));
 	
-	InvAddRoundKey ARK(.*);
+	InvAddRoundKey ARK(.*,.ARK_Out(ARK_Out));
 
-		
 	controller aes_control(.*);
 	
 	assign ISB_Out = invsub_out;
