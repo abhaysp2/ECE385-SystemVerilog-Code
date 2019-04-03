@@ -1,5 +1,5 @@
 //testbench shitmodule testbench ();
-
+module testbench();
 	
     timeunit 10ns;  // how long one unit of time is
 
@@ -31,5 +31,5 @@
 			#2
 			AES_START = 0;
 		end
-
+endmodule
 		
