@@ -1,8 +1,7 @@
 module mux128
-	#(parameter width = 128)
-	(input logic [width-1:0] d0, d1, d2, d3,
+	(input logic [127:0] d0, d1, d2, d3,
 	 input logic [1:0] s,
-	 output logic [width-1:0] y);
+	 output logic [127:0] y);
 
 always_comb 
 	begin

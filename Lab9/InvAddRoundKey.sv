@@ -1,6 +1,5 @@
 //output
 module InvAddRoundKey ( input	logic	[127:0] ARK_INPUT,
-								input logic	[127:0] AES_MSG_ENC,
 								input	logic	[1407:0]	keySchedule,
 								input	logic [3:0] count,
 								output logic	[127:0] ARK_Out);
