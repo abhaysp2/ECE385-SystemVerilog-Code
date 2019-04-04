@@ -109,6 +109,7 @@ module controller(input logic CLK, RESET, AES_START,
 			DONE:
 				begin
 					AES_DONE = 1'b1;
+					countEnable9 = 1'b1;
 				end
 			KeyExpansion:
 				begin
